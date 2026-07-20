@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build with Maven') {
             steps {
                 sh 'mvn clean package'
             }
@@ -23,12 +23,9 @@ pipeline {
 
         stage('Run Container') {
             steps {
-               stage('Run Container') {
-    steps {
-        sh 'docker rm -f javawebapp || true'
-        sh 'docker run -d --name javawebapp -p 8081:8080 javawebapp:v1'
-    }
-}            }
+                sh 'docker rm -f javawebapp || true'
+                sh 'docker run -d --name javawebapp -p 8081:8080 javawebapp:v1'
+            }
         }
     }
 }
